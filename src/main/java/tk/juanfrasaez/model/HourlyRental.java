@@ -1,9 +1,12 @@
 package tk.juanfrasaez.model;
 
+import java.time.temporal.ChronoUnit;
+
 public class HourlyRental extends Rental {
-    private static final double PRICE = 5;
+    public static final double PRICE = 5;
+    public static final ChronoUnit UNIT = ChronoUnit.HOURS;
 
     public HourlyRental() {
-        super(PRICE);
+        super(PRICE, UNIT);
     }
 }
