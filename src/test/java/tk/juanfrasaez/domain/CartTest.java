@@ -2,10 +2,7 @@ package tk.juanfrasaez.domain;
 
 import org.junit.Before;
 import org.junit.Test;
-import tk.juanfrasaez.model.DailyRental;
-import tk.juanfrasaez.model.HourlyRental;
 import tk.juanfrasaez.model.Rental;
-import tk.juanfrasaez.model.WeeklyRental;
 
 import static org.junit.Assert.assertEquals;
 
@@ -19,69 +16,69 @@ public class CartTest {
 
     @Test
     public void shouldCalculateCorrectAmountByHour() {
-        cart.addRental(new HourlyRental());
+        cart.addRental(Rental.HOURLY);
         cart.checkIn();
         cart.checkOut();
-        assertEquals(HourlyRental.PRICE, cart.getTotal(), 0.001);
+        assertEquals(Rental.HOURLY.getPrice(), cart.getTotal(), 0.001);
     }
 
     @Test
     public void shouldCalculateCorrectAmountByDay() {
-        cart.addRental(new DailyRental());
+        cart.addRental(Rental.DAILY);
         cart.checkIn();
         cart.checkOut();
-        assertEquals(DailyRental.PRICE, cart.getTotal(), 0.001);
+        assertEquals(Rental.DAILY.getPrice(), cart.getTotal(), 0.001);
     }
 
     @Test
     public void shouldCalculateCorrectAmountByWeek() {
-        cart.addRental(new WeeklyRental());
+        cart.addRental(Rental.WEEKLY);
         cart.checkIn();
         cart.checkOut();
-        assertEquals(WeeklyRental.PRICE, cart.getTotal(), 0.001);
+        assertEquals(Rental.WEEKLY.getPrice(), cart.getTotal(), 0.001);
     }
 
     @Test
     public void shouldCalculateCorrectAmountWithTwoRentals() {
-        cart.addRental(new HourlyRental());
-        cart.addRental(new DailyRental());
+        cart.addRental(Rental.HOURLY);
+        cart.addRental(Rental.DAILY);
         cart.checkIn();
         cart.checkOut();
-        assertEquals(HourlyRental.PRICE + DailyRental.PRICE, cart.getTotal(), 0.001);
+        assertEquals(Rental.HOURLY.getPrice() + Rental.DAILY.getPrice(), cart.getTotal(), 0.001);
     }
 
     @Test
     public void shouldCalculateCorrectAmountWithOneOfEach() {
-        cart.addRental(new HourlyRental());
-        cart.addRental(new DailyRental());
-        cart.addRental(new WeeklyRental());
+        cart.addRental(Rental.HOURLY);
+        cart.addRental(Rental.DAILY);
+        cart.addRental(Rental.WEEKLY);
         cart.checkIn();
         cart.checkOut();
-        assertEquals((HourlyRental.PRICE + DailyRental.PRICE + WeeklyRental.PRICE) *
+        assertEquals((Rental.HOURLY.getPrice() + Rental.DAILY.getPrice() + Rental.WEEKLY.getPrice()) *
                 (1 - Rental.FAMILY_RENTAL_DISCOUNT), cart.getTotal(), 0.001);
     }
 
     @Test
     public void shouldCalculateCorrectAmountWithFourRentals() {
-        cart.addRentals(new HourlyRental(), 4);
+        cart.addRentals(Rental.HOURLY, 4);
         cart.checkIn();
         cart.checkOut();
-        assertEquals((4 * HourlyRental.PRICE) * (1 - Rental.FAMILY_RENTAL_DISCOUNT), cart.getTotal(), 0.001);
+        assertEquals((4 * Rental.HOURLY.getPrice()) * (1 - Rental.FAMILY_RENTAL_DISCOUNT), cart.getTotal(), 0.001);
     }
 
     @Test
     public void shouldCalculateCorrectAmountWithFiveRentals() {
-        cart.addRentals(new DailyRental(), 5);
+        cart.addRentals(Rental.DAILY, 5);
         cart.checkIn();
         cart.checkOut();
-        assertEquals((5 * DailyRental.PRICE) * (1 - Rental.FAMILY_RENTAL_DISCOUNT), cart.getTotal(), 0.001);
+        assertEquals((5 * Rental.DAILY.getPrice()) * (1 - Rental.FAMILY_RENTAL_DISCOUNT), cart.getTotal(), 0.001);
     }
 
     @Test
     public void shouldCalculateCorrectAmountWithSixRentals() {
-        cart.addRentals(new WeeklyRental(), 6);
+        cart.addRentals(Rental.WEEKLY, 6);
         cart.checkIn();
         cart.checkOut();
-        assertEquals(6 * WeeklyRental.PRICE, cart.getTotal(), 0.001);
+        assertEquals(6 * Rental.WEEKLY.getPrice(), cart.getTotal(), 0.001);
     }
 }

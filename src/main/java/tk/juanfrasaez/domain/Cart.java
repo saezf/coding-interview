@@ -31,6 +31,14 @@ public class Cart {
         rentals.put(rental, quantity);
     }
 
+    public void updateRentals(Rental rental, Integer quantity) {
+        rentals.put(rental, quantity);
+    }
+
+    public void removeRentals(Rental rental) {
+        rentals.remove(rental);
+    }
+
     public void checkIn() {
         checkInTime = LocalDateTime.now();
     }
